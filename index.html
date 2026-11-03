@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLOP AI Agent Terminal</title>
+    <style>
+        body {
+            background-color: #081226;
+            color: #00bfff;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 30px;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+        #terminal {
+            width: 100%;
+            max-width: 800px;
+            height: 500px;
+            background-color: #040a17;
+            border: 2px solid #00bfff;
+            box-shadow: 0 0 20px rgba(0, 191, 255, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+            overflow-y: auto;
+            position: relative;
+        }
+        .line {
+            margin: 0 0 10px 0;
+            line-height: 1.4;
+            white-space: pre-wrap;
+            opacity: 0;
+            transform: translateY(5px);
+            animation: fadeInUp 0.3s forwards;
+        }
+        .system { color: #ffffff; }
+        .success { color: #00ffcc; font-weight: bold; }
+        .warning { color: #ffaa00; }
+        .logo { color: #00bfff; font-weight: bold; }
+        
+        #cursor {
+            display: inline-block;
+            width: 10px;
+            height: 18px;
+            background-color: #00bfff;
+            animation: blink 0.8s infinite;
+            vertical-align: middle;
+            margin-left: 5px;
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="terminal">
+        <div id="output"></div>
+        <span id="cursor"></span>
+    </div>
+
+    <script>
+        const output = document.getElementById('output');
+        const terminal = document.getElementById('terminal');
+
+        const lines = [
+            { text: "=== INITIALIZING FLOP AI AGENT SYSTEM ===", type: "logo" },
+            { text: "[INFO] Booting core network protocols...", type: "system" },
+            { text: "[INFO] Connecting to decentralized GPU clusters...", type: "system" },
+            { text: "[SUCCESS] 128 Mining nodes detected and synchronized.", type: "success" },
+            { text: "[INFO] Checking smart contract integrity...", type: "system" },
+            { text: "[SUCCESS] Verification complete: 100% Fair Launch confirmed.", type: "success" },
+            { text: "[SUCCESS] Verification complete: No Pre-sale rules active.", type: "success" },
+            { text: "[SUCCESS] Verification complete: No Venture Capitals (VCs) allocation.", type: "success" },
+            { text: "[WARNING] High demand for AI token food detected. Scaling bandwidth...", type: "warning" },
+            { text: "[INFO] Preparing node validator environment...", type: "system" },
+            { text: "--------------------------------------------------------", type: "system" },
+            { text: "⚡ FLOP is official food for your AI agent.", type: "logo" },
+            { text: "⚡ System Status: ONLINE & READY", type: "success" },
+            { text: "--------------------------------------------------------", type: "system" },
+            { text: "[COMMAND] Listening for incoming tasks from @flop_labs...", type: "system" }
+        ];
+
+        let currentLine = 0;
+
+        function printLine() {
+            if (currentLine < lines.length) {
+                const lineData = lines[currentLine];
+                const p = document.createElement('div');
+                p.className = `line ${lineData.type}`;
+                p.textContent = lineData.text;
+                
+                output.appendChild(p);
+                terminal.scrollTop = terminal.scrollHeight;
+                currentLine++;
+                
+                const delay = Math.random() * 800 + 400;
+                setTimeout(printLine, delay);
+            }
+        }
+
+        setTimeout(printLine, 1000);
+    </script>
+</body>
+</html>
